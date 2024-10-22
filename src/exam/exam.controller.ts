@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
@@ -36,5 +37,10 @@ export class ExamController {
     @Body() examData: upadateExamDto,
   ) {
     return this.examService.updateExam(id, examData);
+  }
+
+  @Delete(':id')
+  deleteExam(@Param('id', ParseIntPipe) id: number) {
+    return this.examService.deleteExam(id);
   }
 }

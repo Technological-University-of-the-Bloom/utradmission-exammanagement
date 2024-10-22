@@ -59,4 +59,19 @@ export class ExamService {
       throw new Error(error);
     }
   }
+
+  async deleteExam(id: number) {
+    try {
+      const deletedExam = await this.drizzleService.db
+        .delete(databaseSchema.examen)
+        .where(eq(databaseSchema.examen.id_examen, id))
+        .returning();
+      if (deletedExam.length === 0) {
+        throw new NotFoundException();
+      }
+      return deletedExam.pop();
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
 }
