@@ -27,7 +27,7 @@ It will be used for the following:
 - [x] Get exam status
 - [x] Create exam date
 - [x] Update exam date
-- [ ] Get exam date
+- [x] Get exam date
 
 ## Project setup
 

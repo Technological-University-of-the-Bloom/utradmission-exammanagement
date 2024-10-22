@@ -36,6 +36,11 @@ export class ExamController {
     return this.examService.getExamDate(id);
   }
 
+  @Get('data/:id/:data')
+  getExamData(@Param('id', ParseIntPipe) id: number, @Param('data') data: any) {
+    return this.examService.getExamData(id, data);
+  }
+
   @Post('create')
   createExam(@Body() examData: createExamDto) {
     return this.examService.createExam(examData);

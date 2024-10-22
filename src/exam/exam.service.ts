@@ -66,6 +66,29 @@ export class ExamService {
     }
   }
 
+  async getExamData(id: number, data: any) {
+    try {
+      const examData = await this.drizzleService.db
+        .select()
+        .from(databaseSchema.examen)
+        .where(eq(databaseSchema.examen.id_examen, id));
+
+      if (examData.length === 0) {
+        throw new NotFoundException();
+      }
+
+      if (data === 'date') {
+        return examData[0].fecha_aplicar;
+      } else if (data === 'status') {
+        return examData[0].is_active;
+      } else {
+        throw new NotFoundException();
+      }
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
   async createExam(examData: createExamDto) {
     examData.fecha_creacion = new Date();
     try {
