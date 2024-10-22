@@ -23,12 +23,10 @@ It will be used for the following:
 - [x] Update exams
 - [x] Delete exams
 - [x] Get exams
-- [ ] Create exam status
-- [ ] Update exam status
-- [ ] Get exam status
-- [ ] Create exam date
-- [ ] Update exam date
-- [ ] Delete exam date
+- [x] Update exam status
+- [x] Get exam status
+- [x] Create exam date
+- [x] Update exam date
 - [ ] Get exam date
 
 ## Project setup

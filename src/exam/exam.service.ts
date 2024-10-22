@@ -29,6 +29,43 @@ export class ExamService {
     }
   }
 
+  async getExamStatus(id: number) {
+    try {
+      const exams = await this.drizzleService.db
+        .select()
+        .from(databaseSchema.examen)
+        .where(eq(databaseSchema.examen.id_examen, id))
+        .limit(1);
+
+      if (exams.length === 0) {
+        throw new NotFoundException();
+      }
+
+      const examStatus = exams[0].is_active;
+      return examStatus;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async getExamDate(id: number) {
+    try {
+      const exams = await this.drizzleService.db
+        .select()
+        .from(databaseSchema.examen)
+        .where(eq(databaseSchema.examen.id_examen, id));
+
+      if (exams.length === 0) {
+        throw new NotFoundException();
+      }
+
+      const examDate = exams[0].fecha_aplicar;
+      return examDate;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
   async createExam(examData: createExamDto) {
     examData.fecha_creacion = new Date();
     try {
