@@ -19,11 +19,11 @@ It will be used for the following:
 - [ ] Delete answers
 - [ ] Get answers
 - [ ] Import answers
-- [ ] Create exams
-- [ ] Update exams
+- [x] Create exams
+- [x] Update exams
 - [ ] Delete exams
 - [x] Get exams
-- [x] Create exam status
+- [] Create exam status
 - [ ] Update exam status
 - [ ] Get exam status
 - [ ] Create exam date

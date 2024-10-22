@@ -1,8 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { databaseSchema } from '../database/database-schema';
 import { DrizzleService } from '../database/drizzle.service';
 import { eq } from 'drizzle-orm';
 import { createExamDto } from 'dto/create-exam.dto';
+import { upadateExamDto } from 'dto/update-exam.dto';
 
 @Injectable()
 export class ExamService {
@@ -37,6 +38,23 @@ export class ExamService {
         .returning();
 
       return createdExam.pop();
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async updateExam(id: number, examData: upadateExamDto) {
+    examData.fecha_actualizada = new Date();
+    try {
+      const updatedExam = await this.drizzleService.db
+        .update(databaseSchema.examen)
+        .set(examData)
+        .where(eq(databaseSchema.examen.id_examen, id))
+        .returning();
+      if (updatedExam.length === 0) {
+        throw new NotFoundException();
+      }
+      return updatedExam.pop();
     } catch (error) {
       throw new Error(error);
     }

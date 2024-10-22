@@ -4,10 +4,12 @@ import {
   Get,
   Param,
   ParseIntPipe,
+  Patch,
   Post,
 } from '@nestjs/common';
 import { ExamService } from './exam.service';
 import { createExamDto } from 'dto/create-exam.dto';
+import { upadateExamDto } from 'dto/update-exam.dto';
 
 @Controller('exam')
 export class ExamController {
@@ -26,5 +28,13 @@ export class ExamController {
   @Post('create')
   createExam(@Body() examData: createExamDto) {
     return this.examService.createExam(examData);
+  }
+
+  @Patch(':id')
+  updateExam(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() examData: upadateExamDto,
+  ) {
+    return this.examService.updateExam(id, examData);
   }
 }
