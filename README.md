@@ -21,7 +21,7 @@ It will be used for the following:
 - [ ] Import answers
 - [x] Create exams
 - [x] Update exams
-- [ ] Delete exams
+- [x] Delete exams
 - [x] Get exams
 - [ ] Create exam status
 - [ ] Update exam status
