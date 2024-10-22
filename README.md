@@ -22,8 +22,8 @@ It will be used for the following:
 - [ ] Create exams
 - [ ] Update exams
 - [ ] Delete exams
-- [ ] Get exams
-- [ ] Create exam status
+- [x] Get exams
+- [x] Create exam status
 - [ ] Update exam status
 - [ ] Get exam status
 - [ ] Create exam date
