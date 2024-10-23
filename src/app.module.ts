@@ -4,6 +4,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ExamModule } from './exam/exam.module';
 import { DatabaseModule } from './database/database.module';
+import { CarreraModule } from './carrera/carrera.module';
+import { PreguntasModule } from './preguntas/preguntas.module';
+import { RespuestasModule } from './respuestas/respuestas.module';
 import * as Joi from 'joi';
 
 @Module({
@@ -29,6 +32,9 @@ import * as Joi from 'joi';
       }),
     }),
     ExamModule,
+    CarreraModule,
+    PreguntasModule,
+    RespuestasModule,
   ],
   controllers: [AppController],
   providers: [AppService],

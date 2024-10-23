@@ -9,16 +9,15 @@ It will be used for the following:
 
 
 ## Checklist
-- [ ] Create questions
-- [ ] Update questions
-- [ ] Delete questions
-- [ ] Get questions
-- [ ] Import questions
-- [ ] Create answers
-- [ ] Update answers
-- [ ] Delete answers
-- [ ] Get answers
-- [ ] Import answers
+### CRUD
+- [ ] Create questions [v/t]
+- [ ] Update questions [v/t]
+- [ ] Delete questions [v/t]
+- [ ] Get questions [v/t]
+- [ ] Create answers [v/t]
+- [ ] Update answers [v/t]
+- [ ] Delete answers [v/t]
+- [ ] Get answers [v/t]
 - [x] Create exams
 - [x] Update exams
 - [x] Delete exams
@@ -28,6 +27,14 @@ It will be used for the following:
 - [x] Create exam date
 - [x] Update exam date
 - [x] Get exam date
+- [x] Get carrera
+- [x] Create carrera
+- [x] Update carrera
+- [x] Delete carrera
+### OTHER LOGIC
+- [ ] Import answers [v/t]
+- [ ] Import questions [v/t]
+
 
 ## Project setup
 
