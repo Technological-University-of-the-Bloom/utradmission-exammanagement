@@ -10,14 +10,14 @@ It will be used for the following:
 
 ## Checklist
 ### CRUD
-- [ ] Create questions [v/t]
-- [ ] Update questions [v/t]
-- [ ] Delete questions [v/t]
-- [ ] Get questions [v/t]
-- [ ] Create answers [v/t]
-- [ ] Update answers [v/t]
-- [ ] Delete answers [v/t]
-- [ ] Get answers [v/t]
+- [x] Create questions [v/t]
+- [x] Update questions [v/t]
+- [x] Delete questions [v/t]
+- [x] Get questions [v/t]
+- [x] Create answers [v/t]
+- [x] Update answers [v/t]
+- [x] Delete answers [v/t]
+- [x] Get answers [v/t]
 - [x] Create exams
 - [x] Update exams
 - [x] Delete exams
@@ -31,9 +31,11 @@ It will be used for the following:
 - [x] Create carrera
 - [x] Update carrera
 - [x] Delete carrera
-### OTHER LOGIC
-- [ ] Import answers [v/t]
-- [ ] Import questions [v/t]
+### BUSINESS LOGIC
+- [ ] Import/Export answers [v/t]
+- [ ] Import/Export questions [v/t]
+- [x] Update carrera_pv/pt tables when creating new questions [Questions per major]
+- [ ] update pv/pt_respuestas tables when creating new answers [Answers per question]
 
 
 ## Project setup

@@ -2,33 +2,27 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { databaseSchema } from 'src/database/database-schema';
 import { DrizzleService } from 'src/database/drizzle.service';
 import { eq } from 'drizzle-orm';
-import { UpdatePreguntaDto } from 'dto/update-pregunta.dto';
-import { CreatePreguntaDto } from 'dto/create-pregunta.dto';
-import { CarreraPService } from './carrera_p.service';
 import { PgTableWithColumns } from 'drizzle-orm/pg-core';
 import { CreateCarreraPDto } from 'dto/create-carrerap.dto';
+import { UpdateCarreraPDto } from 'dto/update_carrerap.dto';
 
 @Injectable()
-export class PreguntasService {
-  constructor(
-    private readonly drizzleService: DrizzleService,
-    private readonly carreraPService: CarreraPService,
-  ) {}
+export class CarreraPService {
+  constructor(private readonly drizzleService: DrizzleService) {}
 
-  //____________________________________GET___________________________________________
-
-  async getAllPreguntas(typePregunta: any) {
+  // _______________________________GET___________________________________________________________
+  async getAllCarreraPeguntas(typePregunta: string) {
     try {
       let table;
       switch (typePregunta) {
         case 'tecnico':
-          table = databaseSchema.preguntas_tecnico;
+          table = databaseSchema.carrera_pt;
           break;
         case 'vocacional':
-          table = databaseSchema.preguntas_vocacional;
+          table = databaseSchema.carrera_pv;
           break;
         default:
-          throw new Error('Invalid question type');
+          throw new Error('Invalid typePregunta');
       }
       return await this.drizzleService.db.select().from(table);
     } catch (error) {
@@ -36,25 +30,25 @@ export class PreguntasService {
     }
   }
 
-  async getPreguntasById(preguntaType: string, id: number) {
+  async getCarreraPreguntaById(typePregunta: string, id: number) {
     try {
-      let table;
-      switch (preguntaType) {
+      let table: PgTableWithColumns<any>;
+      switch (typePregunta) {
         case 'tecnico':
-          table = databaseSchema.preguntas_tecnico;
+          table = databaseSchema.carrera_pt;
           break;
         case 'vocacional':
-          table = databaseSchema.preguntas_vocacional;
+          table = databaseSchema.carrera_pv;
           break;
         default:
-          throw new Error('Invalid question type');
+          throw new Error('Invalid typePregunta');
       }
       const preguntas = await this.drizzleService.db
         .select()
         .from(table)
         .where(eq(table.id_pregunta, id));
 
-      const pregunta = (preguntas as any[]).pop();
+      const pregunta = preguntas.pop();
 
       if (!pregunta) {
         throw new NotFoundException();
@@ -65,69 +59,56 @@ export class PreguntasService {
     }
   }
 
-  //___________________________________CREATE___________________________________________
+  // _______________________________CREATE___________________________________________________________
 
-  async createPreguntas(typePregunta: string, preguntaData: CreatePreguntaDto) {
+  async createCarreraP(typePregunta: string, preguntaData: CreateCarreraPDto) {
     try {
       let table: PgTableWithColumns<any>;
-      let carreraPData: CreateCarreraPDto;
-
-      if (preguntaData.id_carrera) {
-        carreraPData = {
-          id_pregunta: 0,
-          id_carrera: preguntaData.id_carrera,
-        };
-      }
-
       switch (typePregunta) {
         case 'tecnico':
-          table = databaseSchema.preguntas_tecnico;
+          table = databaseSchema.carrera_pt;
           break;
         case 'vocacional':
-          table = databaseSchema.preguntas_vocacional;
+          table = databaseSchema.carrera_pv;
           break;
         default:
-          throw new Error('Invalid type of question');
+          throw new Error('Invalid typePregunta');
       }
-      preguntaData.id_carrera = null;
+
       const preguntas = await this.drizzleService.db
         .insert(table)
         .values(preguntaData)
         .returning();
       const pregunta = (preguntas as any[]).pop();
       if (!pregunta) {
-        throw new NotFoundException('Failed to create question');
+        throw new NotFoundException();
       }
-
-      if (carreraPData) {
-        carreraPData.id_pregunta = pregunta.id_pregunta;
-        await this.carreraPService.createCarreraP(typePregunta, carreraPData);
-      }
-
       return pregunta;
     } catch (error) {
-      throw error;
+      throw new Error(error);
     }
   }
-  //___________________________________UPDATE___________________________________________
 
-  async updatePregunta(
+  // _______________________________UPDATE___________________________________________________________
+
+  async updateCarreraP(
     typePregunta: string,
     id: number,
-    preguntaData: UpdatePreguntaDto,
+    preguntaData: UpdateCarreraPDto,
   ) {
     try {
-      let table;
+      let table: PgTableWithColumns<any>;
       switch (typePregunta) {
         case 'tecnico':
-          table = databaseSchema.preguntas_tecnico;
+          table = databaseSchema.carrera_pt;
           break;
         case 'vocacional':
-          table = databaseSchema.preguntas_vocacional;
+          table = databaseSchema.carrera_pv;
           break;
         default:
-          throw new Error('Invalid type of question');
+          throw new Error('Invalid typePregunta');
       }
+
       const updatedPregunta = await this.drizzleService.db
         .update(table)
         .set(preguntaData)
@@ -138,37 +119,37 @@ export class PreguntasService {
       if (!pregunta) {
         throw new NotFoundException();
       }
+
       return pregunta;
     } catch (error) {
       throw new Error(error);
     }
   }
 
-  //___________________________________DELETE___________________________________________
+  // _______________________________DELETE___________________________________________________________
 
-  async deletePregunta(typePregunta: string, id: number) {
+  async deleteCarreraP(typePregunta: string, id: number) {
     try {
-      let table;
+      let table: PgTableWithColumns<any>;
       switch (typePregunta) {
         case 'tecnico':
-          table = databaseSchema.preguntas_tecnico;
+          table = databaseSchema.carrera_pt;
           break;
         case 'vocacional':
-          table = databaseSchema.preguntas_vocacional;
+          table = databaseSchema.carrera_pv;
           break;
         default:
           throw new Error('Invalid typePregunta');
       }
+
       const deletedPregunta = await this.drizzleService.db
         .delete(table)
         .where(eq(table.id_pregunta, id))
         .returning();
-
       const pregunta = (deletedPregunta as any[]).pop();
       if (!pregunta) {
         throw new NotFoundException();
       }
-      return pregunta;
     } catch (error) {
       throw new Error(error);
     }
