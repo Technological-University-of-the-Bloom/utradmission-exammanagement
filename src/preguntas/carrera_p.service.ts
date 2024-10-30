@@ -46,14 +46,12 @@ export class CarreraPService {
       const preguntas = await this.drizzleService.db
         .select()
         .from(table)
-        .where(eq(table.id_pregunta, id));
+        .where(eq(table.id_carrera, id));
 
-      const pregunta = preguntas.pop();
-
-      if (!pregunta) {
+      if (!preguntas) {
         throw new NotFoundException();
       }
-      return pregunta;
+      return preguntas;
     } catch (error) {
       throw new Error(error);
     }

@@ -8,7 +8,7 @@ export const pt_respuestas = pgTable(
     id_pregunta: smallserial('id_pregunta')
       .references(() => preguntas_tecnico.id_pregunta)
       .notNull(),
-    id_respuesta: smallserial('id_respuesta')
+    id_respuesta: smallserial('id_respuestas')
       .references(() => respuestas_tecnico.id_respuesta)
       .notNull(),
   },

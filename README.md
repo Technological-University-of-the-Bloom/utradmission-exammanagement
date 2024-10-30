@@ -35,7 +35,8 @@ It will be used for the following:
 - [ ] Import/Export answers [v/t]
 - [ ] Import/Export questions [v/t]
 - [x] Update carrera_pv/pt tables when creating new questions [Questions per major]
-- [ ] update pv/pt_respuestas tables when creating new answers [Answers per question]
+- [x] update pv/pt_respuestas tables when creating new answers [Answers per question]
+- [x] Build exam
 
 
 ## Project setup

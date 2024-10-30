@@ -17,6 +17,13 @@ export const pv_respuestas = pgTable(
       name: 'id_pregunta_fk',
       columns: [table.id_pregunta],
       foreignColumns: [preguntas_vocacional.id_pregunta],
+    })
+      .onDelete('cascade')
+      .onUpdate('cascade'),
+    respuestaFk: foreignKey({
+      name: 'id_respuesta_fk',
+      columns: [table.id_respuesta],
+      foreignColumns: [respuestas_vocacional.id_respuesta],
     }),
   }),
 );

@@ -8,6 +8,12 @@ import { CarreraModule } from './carrera/carrera.module';
 import { PreguntasModule } from './preguntas/preguntas.module';
 import { RespuestasModule } from './respuestas/respuestas.module';
 import * as Joi from 'joi';
+import { ExamService } from './exam/exam.service';
+import { CarreraService } from './carrera/carrera.service';
+import { PreguntasService } from './preguntas/preguntas.service';
+import { RespuestasService } from './respuestas/respuestas.service';
+import { CarreraPService } from './preguntas/carrera_p.service';
+import { PreguntasRespuestasService } from './respuestas/preguntas-respuestas.service';
 
 @Module({
   imports: [
@@ -37,6 +43,14 @@ import * as Joi from 'joi';
     RespuestasModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    ExamService,
+    CarreraService,
+    PreguntasService,
+    RespuestasService,
+    CarreraPService,
+    PreguntasRespuestasService,
+  ],
 })
 export class AppModule {}
